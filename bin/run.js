@@ -5,8 +5,8 @@ const ignore = require("ignore")
 const nodepath = require("path")
 const { fork } = require("child_process")
 
-const testFileInclude = ["src/**/*.test.*"]
-const testFileExclude = []
+const testFileInclude = ["dist/**/*.test.*"]
+const testFileExclude = ["dist/**/*.map"]
 
 const findFilesForTest = (location = process.cwd()) =>
 	glob(testFileInclude, {
@@ -21,14 +21,31 @@ const runFile = file =>
 		const child = fork(file, [], {
 			execArgv: []
 		})
-		child.on("close", () => resolve())
+		child.on("close", status => resolve(status !== 0))
 	})
 
-const runFiles = files =>
-	files.reduce((previous, file) => previous.then(() => runFile(file)), Promise.resolve())
+const runFiles = files => {
+	let someHasCrashed = false
+	return files
+		.reduce(
+			(previous, file) =>
+				previous.then(crashed => {
+					if (crashed) {
+						someHasCrashed = true
+					}
+					return runFile(file)
+				}),
+			Promise.resolve(false)
+		)
+		.then(() => someHasCrashed)
+}
 
-findFilesForTest().then(runFiles, e =>
-	setTimeout(() => {
-		throw e
-	})
-)
+findFilesForTest()
+	.then(runFiles)
+	.then(
+		someHasCrashed => process.exit(someHasCrashed ? 1 : 0),
+		e =>
+			setTimeout(() => {
+				throw e
+			})
+	)

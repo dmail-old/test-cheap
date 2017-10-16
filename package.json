@@ -1,7 +1,7 @@
 {
 	"name": "@dmail/test-cheap",
-	"version": "0.0.1",
-	"licence": "MIT",
+	"version": "0.0.2",
+	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/dmail/test-cheap"
@@ -14,7 +14,8 @@
 	},
 	"main": "index.js",
 	"files": [
-		"src"
+		"src",
+		"bin"
 	],
 	"engines": {
 		"node": ">=8.6.0"
