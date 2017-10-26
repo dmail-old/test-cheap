@@ -21,8 +21,7 @@
 		"node": ">=8.6.0"
 	},
 	"dependencies": {
-		"glob-gitignore": "1.0.5",
-		"ignore": "3.3.5"
+		"glob-gitignore": "1.0.5"
 	},
 	"devDependencies": {
 		"@dmail/prettiest": "0.1.4",
