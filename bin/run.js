@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const { glob } = require("glob-gitignore")
-const ignore = require("ignore")
 const nodepath = require("path")
 const { fork } = require("child_process")
 
@@ -12,7 +11,7 @@ const findFilesForTest = (location = process.cwd()) =>
 	glob(testFileInclude, {
 		nodir: true,
 		cwd: nodepath.resolve(process.cwd(), location),
-		ignore: ignore().add(testFileExclude)
+		ignore: testFileExclude
 	})
 
 const runFile = file =>
