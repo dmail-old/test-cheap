@@ -1,6 +1,6 @@
 {
 	"name": "@dmail/test-cheap",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -24,7 +24,7 @@
 		"glob-gitignore": "1.0.5"
 	},
 	"devDependencies": {
-		"@dmail/prettiest": "0.1.4",
+		"@dmail/prettiest": "0.2.1",
 		"@dmail/shared-config": "1.1.1",
 		"babel-eslint": "8.0.0",
 		"eslint": "3.19.0",
@@ -35,6 +35,7 @@
 	"scripts": {
 		"code-lint": "eslint .",
 		"code-format": "prettiest",
+		"code-list": "prettiest-list",
 		"repo-reset": "rimraf node_modules",
 		"repo-reinstall": "npm run repo-reset && npm install",
 		"reinstall": "npm run repo-reinstall"
